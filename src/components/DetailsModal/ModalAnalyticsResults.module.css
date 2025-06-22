@@ -1,0 +1,11 @@
+.resultsContainer {
+  width: 100%;
+  padding: 10px;
+}
+
+.metricsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+} 

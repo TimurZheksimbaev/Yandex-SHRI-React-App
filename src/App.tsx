@@ -1,7 +1,7 @@
 import { Header, Home, Generator } from "./components"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { HistoryPage } from "./pages/history"
 import "./App.css"
-import { AnalyticsPage, GeneratorPage } from "./pages"
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
         <Header />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<AnalyticsPage />} />
-            <Route path="/generator" element={<GeneratorPage />} />
-            <Route path="/history" element={<div>История (в разработке)</div>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/generator" element={<Generator />} />
+            <Route path="/history" element={<HistoryPage />} />
           </Routes>
         </main>
       </div>

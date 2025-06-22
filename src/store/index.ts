@@ -1,1 +1,2 @@
-export * from './generatorStore'; 
+export * from './generatorStore';
+export * from './historyStore'; 

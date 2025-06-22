@@ -34,4 +34,6 @@ body {
   --button-text-weight: 400;
   --button-radius-small: 10px;
   --button-radius-large: 25px;
+
+  --history-text-size: 20px;
 }

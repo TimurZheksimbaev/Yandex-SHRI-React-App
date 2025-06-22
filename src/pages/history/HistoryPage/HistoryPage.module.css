@@ -1,0 +1,57 @@
+.historyPage {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.historyList {
+  margin-bottom: 24px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--black);
+  font-size: 18px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.generateButton {
+  background-color: var(--dark-green);
+  color: var(--black);
+  border: none;
+  border-radius: var(--button-radius-large);
+  padding: 16px 24px;
+  font-size: var(--button-text-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.clearButton {
+  background-color: var(--black);
+  color: white;
+  border: none;
+  border-radius: var(--button-radius-large);
+  padding: 16px 24px;
+  font-size: var(--button-text-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+

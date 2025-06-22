@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 import styles from "./Home.module.css";
 import { DropZone, AnalyticsResults} from "../";
 import { ApiService, type AggregateResult } from "../../services/api";
@@ -11,6 +11,8 @@ export const Home = () => {
   const [currentProgress, setCurrentProgress] =
     useState<AggregateResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  
+  const updateTimerRef = useRef<number | null>(null);
 
   const handleFileSelect = (selectedFile: File) => {
     setFile(selectedFile);
@@ -28,6 +30,16 @@ export const Home = () => {
     setCurrentProgress(null);
     setIsCompleted(false);
   };
+  
+  const handleProgressUpdate = useCallback((progressResult: AggregateResult) => {
+    if (updateTimerRef.current !== null) {
+      window.clearTimeout(updateTimerRef.current);
+    }
+    
+    updateTimerRef.current = window.setTimeout(() => {
+      setCurrentProgress(progressResult);
+    }, 100);
+  }, []);
 
   const handleSubmit = async () => {
     if (!file) return;
@@ -37,24 +49,30 @@ export const Home = () => {
       setResults(null);
       setCurrentProgress(null);
       setError(null);
+      
+      if (updateTimerRef.current !== null) {
+        window.clearTimeout(updateTimerRef.current);
+        updateTimerRef.current = null;
+      }
 
       const finalResult = await ApiService.aggregateFile(
         file,
         1000,
-        (progressResult) => {
-          setCurrentProgress(progressResult);
-        }
+        handleProgressUpdate,
+        300
       );
 
       setResults(finalResult);
       setIsLoading(false);
       setIsCompleted(true);
 
-      // Сохранение в localStorage для истории
       const historyItem = {
+        id: `history-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        type: 'uploaded',
         fileName: file.name,
         date: new Date().toISOString(),
         results: finalResult,
+        success: true
       };
 
       const history = JSON.parse(localStorage.getItem("csvHistory") || "[]");

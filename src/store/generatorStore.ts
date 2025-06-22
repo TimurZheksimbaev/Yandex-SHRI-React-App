@@ -40,23 +40,19 @@ export const useGeneratorStore = create<GeneratorState>((set, get) => ({
       
       const { fileSize, withErrors, maxSpend } = get().params;
       
-      // Генерируем CSV файл с выбранными параметрами
       const blob = await ApiService.generateReport(fileSize, withErrors, maxSpend);
       
-      // Создаем URL для скачивания
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       const fileName = `galactic-report-${new Date().getTime()}.csv`;
       link.download = fileName;
       
-      // Запускаем скачивание
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      // Сохраняем в историю
       const historyItem = {
         type: 'generated',
         date: new Date().toISOString(),

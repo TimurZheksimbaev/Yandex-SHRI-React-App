@@ -16,7 +16,8 @@ export class ApiService {
   static async aggregateFile(
     file: File, 
     rows: number = 1000,
-    onProgress?: (result: AggregateResult) => void
+    onProgress?: (result: AggregateResult) => void,
+    throttleMs: number = 500 // Добавляем параметр для троттлинга (по умолчанию 500мс)
   ): Promise<AggregateResult> {
     const formData = new FormData();
     formData.append('file', file);
@@ -38,6 +39,7 @@ export class ApiService {
     const decoder = new TextDecoder();
     let buffer = '';
     let lastResult: AggregateResult | null = null;
+    let lastUpdateTime = 0;
 
     try {
       while (true) {
@@ -51,16 +53,26 @@ export class ApiService {
         // Оставляем последнюю неполную строку в буфере
         buffer = lines.pop() || '';
 
+        // Обрабатываем только последнюю строку для оптимизации
+        let latestResult: AggregateResult | null = null;
+        
         for (const line of lines) {
           if (line.trim()) {
             try {
               const result = JSON.parse(line) as AggregateResult;
+              latestResult = result;
               lastResult = result;
-              onProgress?.(result);
             } catch (e) {
               console.warn('Failed to parse line:', line);
             }
           }
+        }
+        
+        // Применяем троттлинг для обновлений UI
+        const now = Date.now();
+        if (latestResult && onProgress && (now - lastUpdateTime >= throttleMs)) {
+          onProgress(latestResult);
+          lastUpdateTime = now;
         }
       }
 

@@ -1,0 +1,94 @@
+.historyItemContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.historyItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: var(--dark-pink);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+.fileInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fileIcon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+}
+
+.fileName {
+    font-size: var(--history-text-size);
+    font-weight: 500;
+    color: var(--black);
+}
+
+.date {
+    font-size: var(--history-text-size);
+    color: var(--black);
+    margin: 0 24px;
+    min-width: 100px;
+}
+
+.status {
+    display: flex;
+    gap: 24px;
+    margin-right: 24px;
+    min-width: 240px;
+}
+
+.successStatus,
+.failStatus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--history-text-size);
+    min-width: 240px;
+}
+
+.successStatus {
+    color: var(--black);
+}
+
+.failStatus {
+    color: var(--black);
+    opacity: 0.5;
+}
+
+.successIcon,
+.failIcon {
+    font-size: 20px;
+}
+
+.removeButton {
+    background: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    padding: 15px;
+}
+
+.removeIcon {
+    width: 24px;
+    height: 24px;
+}
