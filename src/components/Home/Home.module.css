@@ -3,8 +3,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* margin: 40px auto 0; */
-  /* padding: 40px 20px; */
   gap: 20px;
 }
 
@@ -13,8 +11,8 @@
 }
 
 .description p {
-  font-size: 20px;
-  color: #201B10;
+  font-size: var(--title-size);
+  color: var(--black);
   margin: 0;
   width: 400;
 }
@@ -22,7 +20,6 @@
 .description strong {
   font-weight: 700;
 }
-
 
 
 .submitButton {
@@ -42,51 +39,7 @@
 
 .submitButton.active {
   background-color: #2AE881;
-  color: #201B10;
-}
-
-
-.fileInfo {
-  width: 100%;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.fileInfo p {
-  margin: 0;
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-}
-
-.clearButton {
-  background-color: transparent;
-  color: #ef4444;
-  border: 2px solid #ef4444;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.clearButton:hover {
-  background-color: #ef4444;
-  color: white;
-}
-
-.loader {
-  margin-top: 20px;
-  width: 100%;
-  text-align: center;
+  color: var(--black);
 }
 
 .progressBar {

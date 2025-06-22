@@ -1,0 +1,93 @@
+.generatorContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.description {
+  text-align: center;
+}
+
+.description p {
+  font-size: var(--title-size);
+  line-height: 1.4;
+  color: var(--black);
+  margin: 0;
+  font-weight: var(--title-weight);
+}
+
+.description strong {
+  font-weight: 700;
+}
+
+.generateButton {
+  background: var(--dark-green);
+  color: var(--black);
+  border: none;
+  border-radius: var(--button-radius-small);
+  padding: 16px 32px;
+  font-size: var(--button-text-size);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 auto;
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.errorContainer, .successContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.errorBox {
+  background-color: #FF5F00;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.successBox {
+  background-color: #D4FAE6;
+  color: var(--black);
+  padding: 15px 27px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.dismissButton {
+  background: var(--black);
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.dismissButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.statusText {
+  text-align: center;
+  color: var(--black);
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+} 

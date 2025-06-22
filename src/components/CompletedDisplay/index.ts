@@ -1,1 +1,1 @@
-export { CompletedDisplay } from './CompletedDisplay';
+export * from "./CompletedDisplay"

@@ -1,8 +1,8 @@
 .completedWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .fileInfo {
@@ -13,8 +13,8 @@
 }
 
 .fileName {
-  background: #D4FAE6;
-  color: #201B10;
+  background: var(--light-green);
+  color: var(--black);
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 22px;
@@ -22,9 +22,9 @@
 }
 
 .removeButton {
-  background: #201B10;
+  background: var(--black);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--button-radius-small);
   padding: 8px;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@
 
 .statusText {
   text-align: center;
-  color: #201B10;
-  font-size: 26px;
-  font-weight: 400;
+  color: var(--black);
+  font-size: var(--button-text-size);
+  font-weight: var(--button-text-weight);
 }

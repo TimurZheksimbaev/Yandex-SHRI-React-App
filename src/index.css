@@ -17,3 +17,21 @@ body {
 }
 
 
+:root {
+  /* COLORS */
+  --black: #201B10;
+  --light-pink: #FCE2FF;
+  --medium-pink: #EACDFF;
+  --dark-pink: #CB81FF;
+  --dark-green: #2AE881;
+  --light-green: #D4FAE6;
+  --orange: #FF5F00;
+
+  /* FONTS */
+  --title-size: 24px;
+  --title-weight: 400;
+  --button-text-size: 24px;
+  --button-text-weight: 400;
+  --button-radius-small: 10px;
+  --button-radius-large: 25px;
+}

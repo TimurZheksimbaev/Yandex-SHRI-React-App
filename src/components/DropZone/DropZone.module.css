@@ -6,20 +6,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
-  background: #EACDFF;
+  padding: 60px 40px;
+  background: var(--medium-pink);
   transition: all 0.3s ease;
   gap: 10px;
 }
 
 .dragging {
-  background: #D4FAE6;
+  background: var(--light-green);
   transform: scale(1.02);
 }
 
 .withFile {
   border: 1px solid #201B10;
-  background: #FCE2FF;
+  background: var(--light-pink);
 }
 
 .uploadContent {
@@ -32,18 +32,18 @@
 
 .uploadButton {
   background-color: white;
-  color: #201B10;
+  color: var(--black);
   border: none;
   padding: 15px 27px;
-  border-radius: 10px;
-  font-size: 22px;
-  font-weight: 400;
+  border-radius: var(--button-radius-small);
+  font-size: var(--button-text-size);
+  font-weight: var(--button-text-weight);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .dragText {
-  color: #201B10;
-  font-size: 22px;
-  font-weight: 400;
+  color: var(--black);
+  font-size: var(--button-text-size);
+  font-weight: var(--button-text-weight);
 }

@@ -1,21 +1,11 @@
 import styles from "./AnalyticsResults.module.css";
-import { type AggregateResult } from "../../services/api";
+import { type AggregateResult } from "../../../services/api";
+import { AMOUNT_OF_PROCESSED_ENTRIES, AVERAGE_EXPENSES, CIVILIZATION_WITH_MAX_EXPENSES, CIVILIZATION_WITH_MIN_EXPENSES, DAY_WITH_MAX_EXPENSES, DAY_WITH_MIN_EXPENSES, MAX_EXPENSES_IN_ONE_DAY, TOTAL_EXPENSES } from "../../../constants";
+import { MetricCard } from "../MetricCard";
 
 interface AnalyticsResultsProps {
   results: AggregateResult;
 }
-
-interface MetricCardProps {
-  value: string | number;
-  description: string;
-}
-
-const MetricCard = ({ value, description }: MetricCardProps) => (
-  <div className={styles.metricCard}>
-    <div className={styles.metricValue}>{value}</div>
-    <div className={styles.metricDescription}>{description}</div>
-  </div>
-);
 
 export const AnalyticsResults = ({ results }: AnalyticsResultsProps) => {
   const formatNumber = (num: number) => {
@@ -41,35 +31,35 @@ export const AnalyticsResults = ({ results }: AnalyticsResultsProps) => {
       <div className={styles.metricsGrid}>
         <MetricCard 
           value={formatNumber(results.total_spend_galactic)}
-          description="общие расходы в галактических кредитах"
+          description={TOTAL_EXPENSES}
         />
         <MetricCard 
           value={civNames[results.less_spent_civ as keyof typeof civNames] || results.less_spent_civ}
-          description="цивилизация с минимальными расходами"
+          description={CIVILIZATION_WITH_MIN_EXPENSES}
         />
         <MetricCard 
           value={formatNumber(results.rows_affected)}
-          description="количество обработанных записей"
+          description={AMOUNT_OF_PROCESSED_ENTRIES}
         />
         <MetricCard 
           value={formatDate(results.big_spent_at)}
-          description="день года с максимальными расходами"
+          description={DAY_WITH_MAX_EXPENSES}
         />
         <MetricCard 
           value={formatDate(results.less_spent_at)}
-          description="день года с минимальными расходами"
+          description={DAY_WITH_MIN_EXPENSES}
         />
         <MetricCard 
           value={formatNumber(results.big_spent_value)}
-          description="максимальная сумма расходов за день"
+          description={MAX_EXPENSES_IN_ONE_DAY}
         />
         <MetricCard 
           value={civNames[results.big_spent_civ as keyof typeof civNames] || results.big_spent_civ}
-          description="цивилизация с максимальными расходами"
+          description={CIVILIZATION_WITH_MAX_EXPENSES}
         />
         <MetricCard 
           value={formatNumber(results.average_spend_galactic)}
-          description="средние расходы в галактических кредитах"
+          description={AVERAGE_EXPENSES}
         />
       </div>
     </div>

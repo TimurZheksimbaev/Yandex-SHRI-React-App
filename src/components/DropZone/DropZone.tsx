@@ -46,7 +46,7 @@ export const DropZone = ({
       onDrop={handleDrop}
     >
       {isLoading && file ? (
-        <LoadingDisplay />
+        <LoadingDisplay text="идет парсинг файла" />
       ) : isCompleted && file && onRemove ? (
         <CompletedDisplay fileName={file.name} onRemove={onRemove} />
       ) : hasFile && file && onRemove ? (
