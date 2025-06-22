@@ -1,54 +1,136 @@
-# React + TypeScript + Vite
+# Межгалактическая Аналитика
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React-приложение для анализа CSV файлов с данными о расходах различных цивилизаций в галактических кредитах.
 
-Currently, two official plugins are available:
+## 🚀 Инструкции по запуску
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Требования
+- Node.js (версия 16 или выше)
+- npm или yarn
 
-## Expanding the ESLint configuration
+### Установка и запуск
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Клонирование репозитория**
+   ```bash
+   git clone https://github.com/TimurZheksimbaev/Yandex-SHRI-React-App.git
+   cd Yandex-SHRI-React-App
+   ```
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+2. **Установка зависимостей фронтенда**
+   ```bash
+   npm install
+   ```
+
+3. **Откройте новую вкладку терминала. Клонирование и Установка зависимостей бэкенда**
+   ```bash
+   git clone https://github.com/etozhenerk/shri2025-back.git
+   cd shri2025-back
+   npm install
+   ```
+
+4. **Запуск бэкенда**
+   ```bash
+   npm start
+   ```
+   Бэкенд будет на `http://localhost:3000`
+
+5. **Запуск фронтенда**
+   ```bash
+   npm run dev
+   ```
+   Фронтенд будет доступен на `http://localhost:5173`
+
+### Доступные скрипты
+
+**Фронтенд:**
+- `npm run dev` - запуск в режиме разработки
+- `npm run build` - сборка для продакшена
+- `npm run preview` - предварительный просмотр сборки
+- `npm run lint` - проверка кода линтером
+
+**Бэкенд:**
+- `npm run start` - запуск сервера
+
+## 🏗️ Архитектура
+
+### Общая структура
+
+Проект состоит из двух основных частей:
+- **Frontend** (React + TypeScript + Vite)
+- **Backend** (Node.js + Fastify)
+
+#### Технологический стек Frontend
+
+- **React 18** - основная библиотека UI
+- **TypeScript** - типизация
+- **Vite** - сборщик и dev-сервер
+- **CSS Modules** - изолированные стили
+- **ESLint** - линтинг кода
+
+#### Ключевые компоненты
+
+1. **Header** - навигационная панель с логотипом и меню
+2. **Home** - основная логика приложения, управление состоянием
+3. **DropZone** - drag & drop загрузка файлов с различными состояниями
+4. **AnalyticsResults** - отображение результатов в виде карточек
+5. **LoadingDisplay** - индикатор загрузки с прогрессом
+6. **CompletedDisplay** - состояние успешного завершения
+
+#### Управление состоянием
+
+Используется встроенный React useState для управления:
+- Загруженный файл
+- Состояние загрузки/завершения
+- Результаты аналитики
+- Прогресс обработки
+- Ошибки
+
+#### Кастомные хуки
+
+- **useDragAndDrop** - обработка drag & drop функциональности
+
+### Backend архитектура
+
+```
+shri2025-back/
+├── src/
+│   ├── cmd/            # Команды и плагины
+│   │   ├── bootstrap.js
+│   │   ├── serve.js
+│   │   └── plugins/    # Fastify плагины
+│   ├── pkg/            # Основная бизнес-логика
+│   │   ├── aggregator/ # Агрегация данных
+│   │   └── generateReport/ # Генерация отчетов
+│   └── routes/         # API маршруты
+│       ├── aggregate.js
+│       └── report.js
+└── index.js
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+#### Технологический стек Backend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Node.js** - серверная платформа
+- **Fastify** - веб-фреймворк
+- **CSV Parser** - обработка CSV файлов
+- **Multipart** - обработка файлов
+- **CORS** - поддержка кросс-доменных запросов
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+#### API Endpoints
+
+1. **POST /aggregate** 
+   - Обработка CSV файлов
+   - Streaming JSON ответ с прогрессом
+   - Параметры: `rows` (лимит обработки)
+
+2. **GET /report**
+   - Генерация тестовых CSV файлов
+   - Параметры: `size`, `withErrors`, `maxSpend`
+
+### Интеграция Frontend-Backend
+
+#### API Service (`src/services/api.ts`)
+
+- **ApiService.aggregateFile()** - отправка файла и получение результатов
+- **ApiService.generateReport()** - генерация тестовых данных
+- Поддержка streaming для real-time обновлений
+- Типизация всех API ответов
