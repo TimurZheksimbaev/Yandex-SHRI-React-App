@@ -1,0 +1,49 @@
+.dropZone {
+  width: 100%;
+  border: none;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background: #EACDFF;
+  transition: all 0.3s ease;
+  gap: 10px;
+}
+
+.dragging {
+  background: #D4FAE6;
+  transform: scale(1.02);
+}
+
+.withFile {
+  border: 1px solid #201B10;
+  background: #FCE2FF;
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.uploadButton {
+  background-color: white;
+  color: #201B10;
+  border: none;
+  padding: 15px 27px;
+  border-radius: 10px;
+  font-size: 22px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dragText {
+  color: #201B10;
+  font-size: 22px;
+  font-weight: 400;
+}

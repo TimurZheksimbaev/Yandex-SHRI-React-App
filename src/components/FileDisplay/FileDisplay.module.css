@@ -1,0 +1,58 @@
+.fileDisplay {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+.fileInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.fileName {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #201B10;
+}
+
+.fileName.success {
+  background: #CB81FF;
+}
+
+.fileName.error {
+  background: #ff6b35;
+}
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #201B10;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+
+  .crossIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.successMessage {
+  text-align: center;
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.errorMessage {
+  text-align: center;
+  color: #ff6b35;
+  font-size: 18px;
+  font-weight: 400;
+}

@@ -1,0 +1,176 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 40px auto 0;
+  padding: 40px 20px;
+  gap: 20px;
+}
+
+.description {
+  text-align: center;
+}
+
+.description p {
+  font-size: 20px;
+  color: #201B10;
+  margin: 0;
+  width: 400;
+}
+
+.description strong {
+  font-weight: 700;
+}
+
+
+
+.submitButton {
+  border: none;
+  padding: 15px 27px;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitButton.disabled {
+  background-color: #C0C0C0;
+  color: #787878;
+}
+
+.submitButton.active {
+  background-color: #2AE881;
+  color: #201B10;
+}
+
+
+.fileInfo {
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.fileInfo p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+.clearButton {
+  background-color: transparent;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background-color: #ef4444;
+  color: white;
+}
+
+.loader {
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.progressBar {
+  width: 100%;
+  height: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #646cff;
+  border-radius: 5px;
+  width: 0%;
+  animation: progressAnimation 2s infinite;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.highlightsPlaceholder {
+  width: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholderText {
+  font-size: 18px;
+  color: #a855f7;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.highlightsContainer {
+  width: 100%;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.highlightsContainer h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.highlightsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.highlightItem {
+  padding: 16px 20px;
+  background-color: #fff;
+  border-left: 4px solid #a855f7;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-size: 16px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.highlightItem:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
