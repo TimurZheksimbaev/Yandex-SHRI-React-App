@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from "./Home.module.css"
-import { DropZone, FileDisplay } from '../'
+import { DropZone } from '../'
 
 export const Home = () => {
   const [file, setFile] = useState<File | null>(null);

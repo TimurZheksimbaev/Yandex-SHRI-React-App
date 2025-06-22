@@ -10,5 +10,5 @@
   display: flex;
   justify-content: center;
   padding: 20px;
-  margin-top: 80px; /* Для отступа от фиксированного хедера */
+  margin-top: 80px;
 }
