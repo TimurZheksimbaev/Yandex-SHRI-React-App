@@ -1,11 +1,15 @@
-import { useState } from 'react'
-import styles from "./Home.module.css"
-import { DropZone } from '../'
+import { useState } from "react";
+import styles from "./Home.module.css";
+import { DropZone, AnalyticsResults} from "../";
+import { ApiService, type AggregateResult } from "../../services/api";
 
 export const Home = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [highlights, setHighlights] = useState<string[]>([]);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [results, setResults] = useState<AggregateResult | null>(null);
+  const [currentProgress, setCurrentProgress] =
+    useState<AggregateResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleFileSelect = (selectedFile: File) => {
@@ -20,7 +24,9 @@ export const Home = () => {
   const handleRemoveFile = () => {
     setFile(null);
     setError(null);
-    setHighlights([]);
+    setResults(null);
+    setCurrentProgress(null);
+    setIsCompleted(false);
   };
 
   const handleSubmit = async () => {
@@ -28,92 +34,84 @@ export const Home = () => {
 
     try {
       setIsLoading(true);
-      // Здесь будет логика отправки файла на сервер
-      // и получения результатов анализа
-      
-      // Имитация загрузки для демонстрации
-      setTimeout(() => {
-        setHighlights(['Пример хайлайта 1', 'Пример хайлайта 2']);
-        setIsLoading(false);
-        
-        // Сохранение в localStorage для истории
-        const historyItem = {
-          fileName: file.name,
-          date: new Date().toISOString(),
-          highlights: ['Пример хайлайта 1', 'Пример хайлайта 2']
-        };
-        
-        const history = JSON.parse(localStorage.getItem('csvHistory') || '[]');
-        history.push(historyItem);
-        localStorage.setItem('csvHistory', JSON.stringify(history));
-      }, 2000);
-    } catch (error) {
-      console.error('Ошибка при отправке файла:', error);
-      setIsLoading(false);
-    }
-  };
+      setResults(null);
+      setCurrentProgress(null);
+      setError(null);
 
-  const handleClear = () => {
-    handleRemoveFile();
+      const finalResult = await ApiService.aggregateFile(
+        file,
+        1000,
+        (progressResult) => {
+          setCurrentProgress(progressResult);
+        }
+      );
+
+      setResults(finalResult);
+      setIsLoading(false);
+      setIsCompleted(true);
+
+      // Сохранение в localStorage для истории
+      const historyItem = {
+        fileName: file.name,
+        date: new Date().toISOString(),
+        results: finalResult,
+      };
+
+      const history = JSON.parse(localStorage.getItem("csvHistory") || "[]");
+      history.push(historyItem);
+      localStorage.setItem("csvHistory", JSON.stringify(history));
+    } catch (error) {
+      console.error("Ошибка при отправке файла:", error);
+      setError(
+        error instanceof Error ? error.message : "Ошибка при обработке файла"
+      );
+      setIsLoading(false);
+      setIsCompleted(false);
+    }
   };
 
   return (
     <div className={styles.homeContainer}>
       <div className={styles.description}>
-        <p>Загрузите <strong>csv</strong> файл и получите <strong>полную информацию</strong> о нём за сверхнизкое время</p>
+        <p>
+          Загрузите <strong>csv</strong> файл и получите{" "}
+          <strong>полную информацию</strong> о нём за сверхнизкое время
+        </p>
       </div>
-      
+
       <DropZone 
         onFileSelect={handleFileSelect} 
         onError={handleError}
         file={file}
         error={error || undefined}
         onRemove={handleRemoveFile}
+        isLoading={isLoading}
+        isCompleted={isCompleted}
       />
 
-      <button 
-        className={`${styles.submitButton} ${!file || isLoading ? styles.disabled : styles.active}`} 
+      <button
+        className={`${styles.submitButton} ${
+          !file || isLoading ? styles.disabled : styles.active
+        }`}
         onClick={handleSubmit}
         disabled={!file || isLoading}
       >
-        {isLoading ? 'Обработка...' : 'Отправить'}
+        {isLoading ? "Обработка..." : "Отправить"}
       </button>
 
-      {file && (
-        <div className={styles.fileInfo}>
-          <p>Выбран файл: {file.name}</p>
-          <button 
-            className={styles.clearButton} 
-            onClick={handleClear}
-          >
-            Очистить
-          </button>
-        </div>
+      {currentProgress && isLoading && (
+        <AnalyticsResults results={currentProgress} />
       )}
 
-      {isLoading && (
-        <div className={styles.loader}>
-          <p>Загрузка и анализ данных...</p>
-          <div className={styles.progressBar}>
-            <div className={styles.progress}></div>
-          </div>
+      {results && !isLoading && <AnalyticsResults results={results} />}
+
+      {!isLoading && !results && !file && (
+        <div className={styles.highlightsPlaceholder}>
+          <p className={styles.placeholderText}>
+            Здесь появятся результаты аналитики
+          </p>
         </div>
       )}
-
-      <div className={styles.highlightsPlaceholder}>
-        {highlights.length > 0 ? (
-          <div className={styles.highlightsContainer}>
-            <h2>Результаты анализа:</h2>
-            <ul className={styles.highlightsList}>
-              {highlights.map((highlight, index) => (
-                <li key={index} className={styles.highlightItem}>{highlight}</li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <p className={styles.placeholderText}>Здесь появятся хайлайты</p>
-        )}
-      </div>
     </div>
-  )
-}
+  );
+};

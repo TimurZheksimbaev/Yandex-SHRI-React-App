@@ -1,6 +1,8 @@
 import styles from "./DropZone.module.css";
 import { useDragAndDrop } from "../../hooks";
 import { FileDisplay } from "../FileDisplay";
+import { LoadingDisplay } from "../LoadingDisplay";
+import { CompletedDisplay } from "../CompletedDisplay";
 
 interface DropZoneProps {
   onFileSelect: (file: File) => void;
@@ -8,9 +10,19 @@ interface DropZoneProps {
   file?: File | null;
   error?: string;
   onRemove?: () => void;
+  isLoading?: boolean;
+  isCompleted?: boolean;
 }
 
-export const DropZone = ({ onFileSelect, onError, file, error, onRemove }: DropZoneProps) => {
+export const DropZone = ({
+  onFileSelect,
+  onError,
+  file,
+  error,
+  onRemove,
+  isLoading,
+  isCompleted,
+}: DropZoneProps) => {
   const {
     isDragging,
     handleDragOver,
@@ -22,7 +34,9 @@ export const DropZone = ({ onFileSelect, onError, file, error, onRemove }: DropZ
   } = useDragAndDrop(onFileSelect, onError);
 
   const hasFile = Boolean(file);
-  const dropZoneClass = `${styles.dropZone} ${isDragging ? styles.dragging : ""} ${hasFile ? styles.withFile : ""}`;
+  const dropZoneClass = `${styles.dropZone} ${
+    isDragging ? styles.dragging : ""
+  } ${hasFile ? styles.withFile : ""}`;
 
   return (
     <div
@@ -31,7 +45,11 @@ export const DropZone = ({ onFileSelect, onError, file, error, onRemove }: DropZ
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {hasFile && file && onRemove ? (
+      {isLoading && file ? (
+        <LoadingDisplay />
+      ) : isCompleted && file && onRemove ? (
+        <CompletedDisplay fileName={file.name} onRemove={onRemove} />
+      ) : hasFile && file && onRemove ? (
         <FileDisplay file={file} error={error} onRemove={onRemove} />
       ) : (
         <div className={styles.uploadContent}>

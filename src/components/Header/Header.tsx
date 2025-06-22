@@ -30,7 +30,7 @@ export const Header = () => {
     return (
         <header className={styles.headerWrapper}>
             <div className={styles.leftSection}>
-                <img src={logo} alt="Летящие школы" className={styles.brandIcon} />
+                <img src={logo} alt="Летние школы" className={styles.brandIcon} />
                 <div className={styles.title}>МЕЖГАЛАКТИЧЕСКАЯ АНАЛИТИКА</div>
             </div>
 
