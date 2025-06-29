@@ -89,7 +89,7 @@ export const Home = () => {
   };
 
   return (
-    <div className={styles.homeContainer}>
+    <div className={styles.homeContainer} data-testid="home-page">
       <div className={styles.description}>
         <p>
           Загрузите <strong>csv</strong> файл и получите{" "}

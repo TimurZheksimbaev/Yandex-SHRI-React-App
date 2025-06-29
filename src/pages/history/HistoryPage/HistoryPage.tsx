@@ -28,7 +28,7 @@ export const HistoryPage = () => {
   };
 
   return (
-    <div className={styles.historyPage}>
+    <div className={styles.historyPage} data-testid="history-page">
       <h1 className={styles.title}>История загрузок</h1>
       
       {items.length > 0 ? (

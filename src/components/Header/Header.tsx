@@ -28,7 +28,7 @@ export const Header = () => {
     const location = useLocation();
 
     return (
-        <header className={styles.headerWrapper}>
+        <header className={styles.headerWrapper} data-testid="header">
             <div className={styles.leftSection}>
                 <img src={logo} alt="Летние школы" className={styles.brandIcon} />
                 <div className={styles.title}>МЕЖГАЛАКТИЧЕСКАЯ АНАЛИТИКА</div>

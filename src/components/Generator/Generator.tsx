@@ -16,7 +16,7 @@ export const Generator = () => {
   } = useGeneratorStore();
 
   return (
-    <div className={styles.generatorContainer}>
+    <div className={styles.generatorContainer} data-testid="generator-page">
       <div className={styles.description}>
         <p>
           Сгенерируйте готовый <strong>csv-файл</strong> нажатием одной кнопки

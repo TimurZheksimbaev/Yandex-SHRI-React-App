@@ -29,7 +29,7 @@ export const AnalyticsResults = memo(({ results }: AnalyticsResultsProps) => {
   };
 
   return (
-    <div className={styles.resultsContainer}>
+    <div className={styles.resultsContainer} data-testid="analytics-results">
       <div className={styles.metricsGrid}>
         <MetricCard 
           value={formatNumber(results.total_spend_galactic || 1000)}
